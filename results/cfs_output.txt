@@ -1,0 +1,7 @@
+Command: perf bench sched messaging -g 2 -l 10 -t
+
+# Running 'sched/messaging' benchmark:
+# 20 sender and receiver threads per group
+# 2 groups == 80 threads run
+
+     Total time: 0.006 [sec]

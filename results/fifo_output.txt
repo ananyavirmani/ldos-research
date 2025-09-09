@@ -1,0 +1,13 @@
+Command: sudo chrt -f 10 perf bench sched messaging -g 2 -l 10 -t
+
+
+[stderr]
+WARNING: perf not found for kernel 6.6.42
+
+  You may need to install the following packages for this specific kernel:
+    linux-tools-6.6.42-6.6.42
+    linux-cloud-tools-6.6.42-6.6.42
+
+  You may also want to install one of the following packages to keep up to date:
+    linux-tools-6.6.42
+    linux-cloud-tools-6.6.42

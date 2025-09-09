@@ -1,0 +1,5 @@
+Command: sudo chrt -d 0:1000000:2000000 perf bench sched messaging -g 2 -l 10 --thread 4
+
+
+[stderr]
+chrt: invalid priority argument: '0:1000000:2000000'
