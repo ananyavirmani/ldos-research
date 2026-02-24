@@ -1,0 +1,8 @@
+# Ignore the SCX source directory
+scx/
+
+# Ignore compiled C binaries
+super_pi
+
+# Ignore Jupyter temporary files
+.ipynb_checkpoints/
