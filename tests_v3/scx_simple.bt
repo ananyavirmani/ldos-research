@@ -1,0 +1,32 @@
+#include <linux/sched.h>
+
+/* 1. Placement Path: Probing the 'Push' attempt at wakeup */
+kprobe:scx_bpf_select_cpu_dfl {
+    @start_p[tid] = nsecs;
+    @prev_cpu[tid] = ((struct task_struct *)arg0)->thread_info.cpu;
+}
+
+kretprobe:scx_bpf_select_cpu_dfl /@start_p[tid]/ {
+    $target_cpu = retval;
+    if ($target_cpu != @prev_cpu[tid] && $target_cpu >= 0) {
+        @migrations_placement++;
+    }
+    delete(@start_p[tid]);
+    delete(@prev_cpu[tid]);
+}
+
+/* 2. Consume Path: Probing the 'Pull' from the Global DSQ */
+/* Using fentry because it's a kfunc */
+fentry:vmlinux:scx_bpf_consume {
+    @migrations_global_dsq++;
+}
+
+interval:s:10 {
+    printf("\n--- SCX_SIMPLE MIGRATION BREAKDOWN (10s) ---\n");
+    printf("Placement (Push) Migrations: %d\n", @migrations_placement);
+    printf("Global DSQ (Pull) Migrations: %d\n", @migrations_global_dsq);
+    printf("--------------------------------------------\n");
+    printf("TOTAL LOGIC MIGRATIONS:       %d\n", @migrations_placement + @migrations_global_dsq);
+    
+    exit();
+}

@@ -1,0 +1,23 @@
+Attaching 4 probes...
+
+--- SCX_SIMPLE MIGRATION BREAKDOWN (10s) ---
+Placement (Push) Migrations: 3126
+Global DSQ (Pull) Migrations: 676375
+--------------------------------------------
+TOTAL LOGIC MIGRATIONS:       679501
+
+
+@migrations_global_dsq: 676399
+@migrations_placement: 3126
+@prev_cpu[311]: 1
+@prev_cpu[13]: 16
+@prev_cpu[295]: 16
+@prev_cpu[14]: 16
+@prev_cpu[0]: 23
+@prev_cpu[35269]: 23
+@start_p[295]: 78457042734740
+@start_p[311]: 78457075915417
+@start_p[14]: 78457075955660
+@start_p[35269]: 78457075971956
+@start_p[0]: 78457091009156
+@start_p[13]: 78457091018510

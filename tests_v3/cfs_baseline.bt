@@ -1,0 +1,50 @@
+/* * CFS Baseline: Placement & Selection Profile
+ */
+
+#include <linux/sched.h>
+
+kfunc:vmlinux:select_task_rq_fair {
+    @start_p[tid] = nsecs;
+    /* Store the CPU the task is currently on */
+    @prev_cpu[tid] = ((struct task_struct *)args->p)->thread_info.cpu;
+}
+
+kretfunc:vmlinux:select_task_rq_fair /@start_p[tid]/ {
+    /* Use $ for scratch variables, no type needed */
+    $target_cpu = retval; 
+    
+    @latency_placement_ns = hist(nsecs - @start_p[tid]);
+    @calls_placement++;
+    
+    if ($target_cpu != @prev_cpu[tid]) {
+        @migrations++;
+    }
+    
+    delete(@start_p[tid]);
+    delete(@prev_cpu[tid]);
+}
+
+kfunc:vmlinux:pick_next_task_fair {
+    @start_s[tid] = nsecs;
+}
+
+kretfunc:vmlinux:pick_next_task_fair /@start_s[tid]/ {
+    @latency_selection_ns = hist(nsecs - @start_s[tid]);
+    @calls_selection++;
+    delete(@start_s[tid]);
+}
+
+interval:s:10 {
+    printf("\n--- CFS Operational Baseline (10s Window) ---\n");
+    printf("Placement Calls: %d\n", @calls_placement);
+    printf("Migrations:      %d\n", @migrations);
+    printf("Selection Calls: %d\n", @calls_selection);
+    
+    printf("\nPlacement Latency (ns):\n");
+    print(@latency_placement_ns);
+    
+    printf("\nSelection Latency (ns):\n");
+    print(@latency_selection_ns);
+    
+    exit();
+}
