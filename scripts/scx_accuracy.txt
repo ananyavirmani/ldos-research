@@ -1,0 +1,158 @@
+Attaching 3 probes...
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Time: 22.155
+Time: 30.296
+Time: 41.532
+Time: 48.338
+
+--- PLACEMENT ACCURACY / LOCALITY REPORT ---
+@decision_type[Perfect Locality (Same CPU)]: 63370
+@decision_type[Soft Migration (Same Core)]: 357770
+@decision_type[Hard Migration (New Core)]: 11970005
+
+--- MIGRATIONS PER PROCESS ---
+@migrations[grep]: 1
+@migrations[kworker/25:1]: 1
+@migrations[sadc]: 1
+@migrations[ksoftirqd/31]: 1
+@migrations[kworker/7:0]: 1
+@migrations[systemd-detect-]: 1
+@migrations[kworker/17:1]: 1
+@migrations[ksoftirqd/21]: 1
+@migrations[rm]: 1
+@migrations[swapper/16]: 1
+@migrations[kworker/17:0]: 1
+@migrations[swapper/36]: 1
+@migrations[jbd2/sda3-8]: 1
+@migrations[kworker/39:1]: 1
+@migrations[kworker/39:0]: 1
+@migrations[sed]: 1
+@migrations[swapper/39]: 1
+@migrations[systemd-logind]: 1
+@migrations[swapper/4]: 1
+@migrations[swapper/21]: 1
+@migrations[(sa1)]: 1
+@migrations[ksoftirqd/24]: 1
+@migrations[ksoftirqd/11]: 1
+@migrations[(sd-close)]: 1
+@migrations[9]: 1
+@migrations[rs:main Q:Reg]: 2
+@migrations[kworker/25:0]: 2
+@migrations[(otd-news)]: 2
+@migrations[kworker/15:1]: 2
+@migrations[mixed_workloads]: 2
+@migrations[tr]: 2
+@migrations[swapper/1]: 2
+@migrations[kworker/u162:1]: 2
+@migrations[kworker/7:1]: 2
+@migrations[swapper/23]: 2
+@migrations[kworker/25:2]: 2
+@migrations[awk]: 3
+@migrations[kworker/39:3]: 3
+@migrations[cut]: 3
+@migrations[head]: 3
+@migrations[cat]: 3
+@migrations[tee]: 4
+@migrations[swapper/30]: 4
+@migrations[mktemp]: 4
+@migrations[dpkg-query]: 4
+@migrations[swapper/8]: 5
+@migrations[uname]: 5
+@migrations[systemd-resolve]: 5
+@migrations[wget]: 7
+@migrations[50-motd-news]: 10
+@migrations[systemd-journal]: 12
+@migrations[in:imuxsock]: 13
+@migrations[kworker/u161:3]: 13
+@migrations[kworker/u161:4]: 15
+@migrations[kworker/u162:0]: 16
+@migrations[dbus-daemon]: 16
+@migrations[systemd]: 17
+@migrations[sshd]: 21
+@migrations[cloud-id]: 29
+@migrations[kworker/u162:2]: 39
+@migrations[kworker/u161:1]: 41
+@migrations[kworker/0:2]: 42
+@migrations[scx_simple]: 46
+@migrations[sudo]: 46
+@migrations[multipathd]: 51
+@migrations[hackbench]: 12327248
+
+
+@decision_type[Perfect Locality (Same CPU)]: 63370
+@decision_type[Soft Migration (Same Core)]: 357770
+@decision_type[Hard Migration (New Core)]: 11970005
+
+@migrations[grep]: 1
+@migrations[kworker/25:1]: 1
+@migrations[sadc]: 1
+@migrations[ksoftirqd/31]: 1
+@migrations[kworker/7:0]: 1
+@migrations[systemd-detect-]: 1
+@migrations[kworker/17:1]: 1
+@migrations[ksoftirqd/21]: 1
+@migrations[rm]: 1
+@migrations[swapper/16]: 1
+@migrations[kworker/17:0]: 1
+@migrations[swapper/36]: 1
+@migrations[jbd2/sda3-8]: 1
+@migrations[kworker/39:1]: 1
+@migrations[kworker/39:0]: 1
+@migrations[sed]: 1
+@migrations[swapper/39]: 1
+@migrations[systemd-logind]: 1
+@migrations[swapper/4]: 1
+@migrations[swapper/21]: 1
+@migrations[(sa1)]: 1
+@migrations[ksoftirqd/24]: 1
+@migrations[ksoftirqd/11]: 1
+@migrations[(sd-close)]: 1
+@migrations[9]: 1
+@migrations[rs:main Q:Reg]: 2
+@migrations[kworker/25:0]: 2
+@migrations[(otd-news)]: 2
+@migrations[kworker/15:1]: 2
+@migrations[mixed_workloads]: 2
+@migrations[tr]: 2
+@migrations[swapper/1]: 2
+@migrations[kworker/u162:1]: 2
+@migrations[kworker/7:1]: 2
+@migrations[swapper/23]: 2
+@migrations[kworker/25:2]: 2
+@migrations[awk]: 3
+@migrations[kworker/39:3]: 3
+@migrations[cut]: 3
+@migrations[head]: 3
+@migrations[cat]: 3
+@migrations[tee]: 4
+@migrations[swapper/30]: 4
+@migrations[mktemp]: 4
+@migrations[dpkg-query]: 4
+@migrations[swapper/8]: 5
+@migrations[uname]: 5
+@migrations[systemd-resolve]: 5
+@migrations[wget]: 7
+@migrations[50-motd-news]: 10
+@migrations[systemd-journal]: 12
+@migrations[in:imuxsock]: 13
+@migrations[kworker/u161:3]: 13
+@migrations[kworker/u161:4]: 15
+@migrations[kworker/u162:0]: 16
+@migrations[dbus-daemon]: 16
+@migrations[systemd]: 17
+@migrations[sshd]: 21
+@migrations[cloud-id]: 29
+@migrations[kworker/u162:2]: 39
+@migrations[kworker/u161:1]: 41
+@migrations[kworker/0:2]: 42
+@migrations[scx_simple]: 46
+@migrations[sudo]: 46
+@migrations[multipathd]: 51
+@migrations[hackbench]: 12327248

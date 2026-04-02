@@ -1,0 +1,26 @@
+#!/usr/bin/bpftrace
+
+/* * SCX Logic Performance Profile
+ * Targets the BPF scheduler equivalent hooks.
+ */
+
+/* 1. SCX Placement (select_cpu) */
+fentry:vmlinux:ops_select_cpu { @start_pl[tid] = nsecs; }
+fexit:vmlinux:ops_select_cpu /@start_pl[tid]/ {
+    $d = nsecs - @start_pl[tid];
+    if ($d > 0 && $d < 1000000) { @scx_lat["1. SCX_Placement"] = avg($d); }
+    delete(@start_pl[tid]);
+}
+
+/* 2. SCX Accounting (running) */
+fentry:vmlinux:ops_running { @start_acct[tid] = nsecs; }
+fexit:vmlinux:ops_running /@start_acct[tid]/ {
+    $d = nsecs - @start_acct[tid];
+    if ($d > 0 && $d < 1000000) { @scx_lat["2. SCX_Accounting"] = avg($d); }
+    delete(@start_acct[tid]);
+}
+
+END {
+    printf("\n--- SCX PERFORMANCE RESULTS (ns) ---\n");
+    print(@scx_lat);
+}

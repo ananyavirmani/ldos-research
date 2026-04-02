@@ -1,0 +1,46 @@
+#!/usr/bin/bpftrace
+
+/* * CFS Logic Performance (BTF Mode)
+ * Uses fentry/fexit for maximum stability on 6.12 kernels.
+ */
+
+/* 1. Placement Latency */
+fentry:select_task_rq_fair { @start_pl[tid] = nsecs; }
+fexit:select_task_rq_fair /@start_pl[tid]/ {
+    @latency_ns["1. select_task_rq_fair (Placement)"] = avg(nsecs - @start_pl[tid]);
+    delete(@start_pl[tid]);
+}
+
+/* 2. Accounting Latency */
+fentry:update_curr { @start_acct[tid] = nsecs; }
+fexit:update_curr /@start_acct[tid]/ {
+    @latency_ns["2. update_curr (Accounting)"] = avg(nsecs - @start_acct[tid]);
+    delete(@start_acct[tid]);
+}
+
+/* 3. Migration Check Latency */
+fentry:can_migrate_task { @start_mig[tid] = nsecs; }
+fexit:can_migrate_task /@start_mig[tid]/ {
+    @latency_ns["3. can_migrate_task (Migration)"] = avg(nsecs - @start_mig[tid]);
+    delete(@start_mig[tid]);
+}
+
+/* 4. Priority Logic Latency */
+fentry:prio_less { @start_prio[tid] = nsecs; }
+fexit:prio_less /@start_prio[tid]/ {
+    @latency_ns["4. prio_less (Priority)"] = avg(nsecs - @start_prio[tid]);
+    delete(@start_prio[tid]);
+}
+
+/* 5. Core Sched Latency */
+fentry:__sched_core_less { @start_core[tid] = nsecs; }
+fexit:__sched_core_less /@start_core[tid]/ {
+    @latency_ns["5. __sched_core_less (Core_Sched)"] = avg(nsecs - @start_core[tid]);
+    delete(@start_core[tid]);
+}
+
+END {
+    printf("\n--- CFS BTF LATENCY RESULTS (ns) ---\n");
+    print(@latency_ns);
+    clear(@start_pl); clear(@start_acct); clear(@start_mig); clear(@start_prio); clear(@start_core);
+}

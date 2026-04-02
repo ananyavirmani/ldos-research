@@ -1,0 +1,3 @@
+Scheduler,Accounting_Lat,Placement_Lat,Workload_Time,Soft_Migration,Perfect_Locality,Hard_Migration
+CFS,496,862,21.374499999999998,1877318,3269323,4350557
+SCX,751,627,28.366,357770,63370,11970005

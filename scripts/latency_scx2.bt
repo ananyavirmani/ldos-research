@@ -1,0 +1,22 @@
+#!/usr/bin/bpftrace
+
+/* 1. SCX Placement (Equivalent to select_task_rq_fair) */
+fentry:vmlinux:scx_bpf_select_cpu_dfl { @start_pl[tid] = nsecs; }
+fexit:vmlinux:scx_bpf_select_cpu_dfl /@start_pl[tid]/ {
+    $d = nsecs - @start_pl[tid];
+    if ($d > 0 && $d < 1000000) { @scx_latency["1. SCX_Placement"] = avg($d); }
+    delete(@start_pl[tid]);
+}
+
+/* 2. SCX Accounting (Equivalent to update_curr) */
+fentry:vmlinux:scx_bpf_task_running { @start_acct[tid] = nsecs; }
+fexit:vmlinux:scx_bpf_task_running /@start_acct[tid]/ {
+    $d = nsecs - @start_acct[tid];
+    if ($d > 0 && $d < 1000000) { @scx_latency["2. SCX_Accounting"] = avg($d); }
+    delete(@start_acct[tid]);
+}
+
+END {
+    printf("\n--- SCX COMPARISON RESULTS (ns) ---\n");
+    print(@scx_latency);
+}

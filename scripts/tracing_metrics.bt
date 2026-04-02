@@ -1,0 +1,43 @@
+#!/usr/bin/bpftrace
+
+/* 1. Placement (select_task_rq_fair) */
+kprobe:select_task_rq_fair { 
+    @start_pl[tid] = nsecs; 
+}
+/* We hook the end of placement by looking for the next scheduler activity */
+kprobe:__enqueue_entity, kprobe:update_curr {
+    if (@start_pl[tid]) {
+        @latency_ns["1. Placement (select_task_rq_fair)"] = avg(nsecs - @start_pl[tid]);
+        delete(@start_pl[tid]);
+    }
+}
+
+/* 2. Accounting (update_curr) */
+kprobe:update_curr { 
+    @start_acct[tid] = nsecs; 
+}
+/* update_curr is usually short; we hook the very next instruction or return */
+tracepoint:sched:sched_switch {
+    if (@start_acct[tid]) {
+        @latency_ns["2. Accounting (update_curr)"] = avg(nsecs - @start_acct[tid]);
+        delete(@start_acct[tid]);
+    }
+}
+
+/* 3. Priority (prio_less) */
+/* Since this is a leaf function, we will try one more time with a direct kprobe 
+   at the end of the function if you have the offset, otherwise we count it. */
+kprobe:prio_less { 
+    @start_prio[tid] = nsecs; 
+}
+/* Fallback for prio_less: record on the next call or end of loop */
+kprobe:prio_less {
+    if (@start_prio[tid]) {
+        @latency_ns["4. Priority (prio_less)"] = avg(nsecs - @start_prio[tid]);
+    }
+}
+
+END {
+    printf("\n--- CFS LATENCY PROFILE (NANOSECONDS) ---\n");
+    print(@latency_ns);
+}

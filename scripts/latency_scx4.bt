@@ -1,0 +1,27 @@
+#!/usr/bin/bpftrace
+
+/* 1. SCX Placement (Confirmed Working) */
+fentry:vmlinux:scx_bpf_select_cpu_dfl { 
+    @start_pl[tid] = nsecs; 
+}
+fexit:vmlinux:scx_bpf_select_cpu_dfl /@start_pl[tid]/ {
+    $d = nsecs - @start_pl[tid];
+    if ($d > 0 && $d < 1000000) { @scx_lat["1. SCX_Placement"] = avg($d); }
+    delete(@start_pl[tid]);
+}
+
+/* 2. SCX Accounting (Using scx_tick as the equivalent) */
+fentry:vmlinux:scx_tick { 
+    @start_tick[tid] = nsecs; 
+}
+fexit:vmlinux:scx_tick /@start_tick[tid]/ {
+    $d = nsecs - @start_tick[tid];
+    if ($d > 0 && $d < 1000000) { @scx_lat["2. SCX_Accounting (Tick)"] = avg($d); }
+    delete(@start_tick[tid]);
+}
+
+END {
+    printf("\n--- SCX BIG TWO RESULTS (ns) ---\n");
+    print(@scx_lat);
+    clear(@start_pl); clear(@start_tick);
+}

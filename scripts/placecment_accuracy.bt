@@ -1,0 +1,33 @@
+#!/usr/bin/bpftrace
+
+/* Track which CPU a task was on last */
+tracepoint:sched:sched_switch {
+    @last_cpu[args->prev_pid] = cpu;
+}
+
+/* When the task wakes up, check if the scheduler moved it */
+tracepoint:sched:sched_wakeup {
+    $old_cpu = @last_cpu[args->pid];
+    if ($old_cpu != 0 && $old_cpu != cpu) {
+        /* This is a Migration Decision */
+        @migrations[comm] = count();
+        
+        /* Check if it stayed on the same physical core (SMT sibling) */
+        /* Note: On your 40-core node, siblings are usually N and N+20 */
+        if ($old_cpu % 20 == cpu % 20) {
+            @decision_type["Soft Migration (Same Core)"] = count();
+        } else {
+            @decision_type["Hard Migration (New Core)"] = count();
+        }
+    } else if ($old_cpu == cpu) {
+        @decision_type["Perfect Locality (Same CPU)"] = count();
+    }
+}
+
+END {
+    printf("\n--- PLACEMENT ACCURACY / LOCALITY REPORT ---\n");
+    print(@decision_type);
+    printf("\n--- MIGRATIONS PER PROCESS ---\n");
+    print(@migrations);
+    clear(@last_cpu);
+}

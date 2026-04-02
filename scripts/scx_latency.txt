@@ -1,0 +1,25 @@
+Attaching 5 probes...
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Time: 24.722
+Time: 35.268
+Time: 37.502
+Time: 15.972
+
+--- SCX BIG TWO RESULTS (ns) ---
+@scx_lat[1. SCX_Placement]: 627
+@scx_lat[2. SCX_Accounting (Tick)]: 751
+
+
+
+@scx_lat[1. SCX_Placement]: 627
+@scx_lat[2. SCX_Accounting (Tick)]: 751
+
+
+

@@ -1,0 +1,30 @@
+#!/usr/bin/bpftrace
+
+/* 1. Placement */
+fentry:select_task_rq_fair { @start_pl[tid] = nsecs; }
+fexit:select_task_rq_fair /@start_pl[tid]/ {
+    $d = nsecs - @start_pl[tid];
+    if ($d > 0 && $d < 1000000) { @latency_ns["1. Placement"] = avg($d); }
+    delete(@start_pl[tid]);
+}
+
+/* 2. Accounting */
+fentry:update_curr { @start_acct[tid] = nsecs; }
+fexit:update_curr /@start_acct[tid]/ {
+    $d = nsecs - @start_acct[tid];
+    if ($d > 0 && $d < 1000000) { @latency_ns["2. Accounting"] = avg($d); }
+    delete(@start_acct[tid]);
+}
+
+/* 5. Core Sched (SMT Comparison) */
+fentry:__sched_core_less { @start_core[tid] = nsecs; }
+fexit:__sched_core_less /@start_core[tid]/ {
+    $d = nsecs - @start_core[tid];
+    if ($d > 0 && $d < 1000000) { @latency_ns["5. Core_Sched"] = avg($d); }
+    delete(@start_core[tid]);
+}
+
+END {
+    printf("\n--- CFS FULL SENSITIVITY PROFILE (ns) ---\n");
+    print(@latency_ns);
+}

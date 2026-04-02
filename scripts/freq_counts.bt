@@ -1,0 +1,17 @@
+#!/usr/bin/bpftrace
+
+kprobe:select_task_rq_fair { @cfs["1. Placement"] = count(); }
+kprobe:update_curr          { @cfs["2. Accounting"] = count(); }
+kprobe:can_migrate_task     { @cfs["3. Migration"] = count(); }
+kprobe:prio_less            { @cfs["4. Priority (prio_less)"] = count(); }
+kprobe:__sched_core_less    { @cfs["5. Core_Sched (core_less)"] = count(); }
+
+/* Track how many unique tasks are being managed */
+tracepoint:sched:sched_wakeup { @tasks[args.pid] = count(); }
+
+END {
+    printf("\n--- CFS MIXED PRIORITY TOTALS ---\n");
+    print(@cfs);
+    printf("Total unique tasks encountered: %d\n", count(@tasks));
+    clear(@tasks);
+}

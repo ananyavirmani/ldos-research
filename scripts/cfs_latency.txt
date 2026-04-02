@@ -1,0 +1,73 @@
+Attaching 7 probes...
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Time: 13.200
+Time: 16.319
+Time: 25.183
+Time: 30.796
+
+--- CFS FULL SENSITIVITY PROFILE (ns) ---
+@latency_ns[2. Accounting]: 496
+@latency_ns[1. Placement]: 862
+
+
+
+@latency_ns[2. Accounting]: 496
+@latency_ns[1. Placement]: 862
+
+@start_acct[303]: 155145705533295
+@start_acct[56024]: 155145705537168
+@start_acct[300]: 155145705537385
+@start_acct[45785]: 155145705538060
+@start_acct[50142]: 155145705539233
+@start_acct[312]: 155145705540639
+@start_acct[1348]: 155145705542928
+@start_acct[315]: 155145705546223
+@start_acct[48284]: 155145705546425
+@start_acct[316]: 155145705548750
+@start_acct[42789]: 155145705552475
+@start_acct[32624]: 155145705556728
+@start_acct[318]: 155145705558589
+@start_acct[805]: 155145705561010
+@start_acct[322]: 155145705567420
+@start_acct[321]: 155145705570989
+@start_acct[34269]: 155145705573279
+@start_acct[1450]: 155145705574847
+@start_acct[325]: 155145705579780
+@start_acct[342]: 155145705581210
+@start_acct[291]: 155145705582369
+@start_acct[49106]: 155145705583070
+@start_acct[328]: 155145705585363
+@start_acct[326]: 155145705586974
+@start_acct[43486]: 155145705589980
+@start_acct[29341]: 155145705590094
+@start_acct[49926]: 155145705598334
+@start_acct[51171]: 155145705599436
+@start_acct[333]: 155145705603951
+@start_acct[63968]: 155145705605047
+@start_acct[50353]: 155145705607192
+@start_acct[27694]: 155145705608911
+@start_acct[47464]: 155145705611705
+@start_acct[37652]: 155145705618067
+@start_acct[338]: 155145705619950
+@start_acct[339]: 155145705620177
+@start_acct[340]: 155145705624511
+@start_acct[341]: 155145705630137
+@start_acct[184]: 155145705636731
+@start_acct[14]: 155145705657041
+@start_acct[13]: 155145725028482
+@start_acct[0]: 155145736019203
+@start_acct[17]: 155145736027444
+@start_acct[63966]: 155145738846564
+@start_acct[320]: 155145738852870
+
+@start_pl[14]: 155145806170371
+@start_pl[0]: 155145850011352
+@start_pl[13]: 155145850027716
+@start_pl[63966]: 155145860011109

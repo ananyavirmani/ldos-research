@@ -1,0 +1,122 @@
+Attaching 3 probes...
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Running in process mode with 10 groups using 40 file descriptors each (== 400 tasks)
+Each sender will pass 10000 messages of 100 bytes
+Time: 14.978
+Time: 18.132
+Time: 26.390
+Time: 29.122
+
+--- PLACEMENT ACCURACY / LOCALITY REPORT ---
+@decision_type[Soft Migration (Same Core)]: 1877318
+@decision_type[Perfect Locality (Same CPU)]: 3269323
+@decision_type[Hard Migration (New Core)]: 4350557
+
+--- MIGRATIONS PER PROCESS ---
+@migrations[kworker/u162:2]: 1
+@migrations[tee]: 1
+@migrations[kworker/u162:4]: 2
+@migrations[kworker/u161:0]: 2
+@migrations[kworker/u162:0]: 2
+@migrations[multipathd]: 33
+@migrations[kworker/0:2]: 35
+@migrations[swapper/2]: 506
+@migrations[swapper/20]: 832
+@migrations[swapper/22]: 973
+@migrations[swapper/0]: 1041
+@migrations[swapper/1]: 1096
+@migrations[swapper/33]: 1137
+@migrations[swapper/9]: 1171
+@migrations[swapper/11]: 1196
+@migrations[swapper/3]: 1236
+@migrations[swapper/39]: 1401
+@migrations[swapper/7]: 1447
+@migrations[swapper/13]: 1461
+@migrations[swapper/18]: 1488
+@migrations[swapper/36]: 1548
+@migrations[swapper/21]: 1705
+@migrations[swapper/31]: 1727
+@migrations[swapper/10]: 1756
+@migrations[swapper/6]: 1900
+@migrations[swapper/27]: 2025
+@migrations[swapper/19]: 2109
+@migrations[swapper/23]: 2149
+@migrations[swapper/26]: 2174
+@migrations[swapper/4]: 2184
+@migrations[swapper/30]: 2186
+@migrations[swapper/29]: 2204
+@migrations[swapper/15]: 2272
+@migrations[swapper/37]: 2313
+@migrations[swapper/17]: 2450
+@migrations[swapper/32]: 2457
+@migrations[swapper/25]: 2483
+@migrations[swapper/24]: 2509
+@migrations[swapper/8]: 2564
+@migrations[swapper/35]: 2606
+@migrations[swapper/38]: 2743
+@migrations[swapper/12]: 2829
+@migrations[swapper/34]: 2862
+@migrations[swapper/16]: 3126
+@migrations[swapper/14]: 3171
+@migrations[swapper/28]: 3198
+@migrations[swapper/5]: 4230
+@migrations[hackbench]: 6147334
+
+
+@decision_type[Soft Migration (Same Core)]: 1877318
+@decision_type[Perfect Locality (Same CPU)]: 3269323
+@decision_type[Hard Migration (New Core)]: 4350557
+
+@migrations[kworker/u162:2]: 1
+@migrations[tee]: 1
+@migrations[kworker/u162:4]: 2
+@migrations[kworker/u161:0]: 2
+@migrations[kworker/u162:0]: 2
+@migrations[multipathd]: 33
+@migrations[kworker/0:2]: 35
+@migrations[swapper/2]: 506
+@migrations[swapper/20]: 832
+@migrations[swapper/22]: 973
+@migrations[swapper/0]: 1041
+@migrations[swapper/1]: 1096
+@migrations[swapper/33]: 1137
+@migrations[swapper/9]: 1171
+@migrations[swapper/11]: 1196
+@migrations[swapper/3]: 1236
+@migrations[swapper/39]: 1401
+@migrations[swapper/7]: 1447
+@migrations[swapper/13]: 1461
+@migrations[swapper/18]: 1488
+@migrations[swapper/36]: 1548
+@migrations[swapper/21]: 1705
+@migrations[swapper/31]: 1727
+@migrations[swapper/10]: 1756
+@migrations[swapper/6]: 1900
+@migrations[swapper/27]: 2025
+@migrations[swapper/19]: 2109
+@migrations[swapper/23]: 2149
+@migrations[swapper/26]: 2174
+@migrations[swapper/4]: 2184
+@migrations[swapper/30]: 2186
+@migrations[swapper/29]: 2204
+@migrations[swapper/15]: 2272
+@migrations[swapper/37]: 2313
+@migrations[swapper/17]: 2450
+@migrations[swapper/32]: 2457
+@migrations[swapper/25]: 2483
+@migrations[swapper/24]: 2509
+@migrations[swapper/8]: 2564
+@migrations[swapper/35]: 2606
+@migrations[swapper/38]: 2743
+@migrations[swapper/12]: 2829
+@migrations[swapper/34]: 2862
+@migrations[swapper/16]: 3126
+@migrations[swapper/14]: 3171
+@migrations[swapper/28]: 3198
+@migrations[swapper/5]: 4230
+@migrations[hackbench]: 6147334

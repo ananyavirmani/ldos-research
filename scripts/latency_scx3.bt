@@ -1,0 +1,36 @@
+#!/usr/bin/bpftrace
+
+/* 1. SCX Placement */
+fentry:vmlinux:scx_bpf_select_cpu_dfl,
+fentry:vmlinux:scx_simple_select_cpu { 
+    @start_pl[tid] = nsecs; 
+}
+
+fexit:vmlinux:scx_bpf_select_cpu_dfl,
+fexit:vmlinux:scx_simple_select_cpu /@start_pl[tid]/ {
+    $d = nsecs - @start_pl[tid];
+    if ($d > 0 && $d < 1000000) { @scx_latency["1. SCX_Placement"] = avg($d); }
+    delete(@start_pl[tid]);
+}
+
+/* 2. SCX Accounting */
+/* We catch any 'running' hook used by the scheduler */
+fentry:vmlinux:scx_bpf_task_running,
+fentry:vmlinux:scx_simple_running { 
+    @start_acct[tid] = nsecs; 
+}
+
+fexit:vmlinux:scx_bpf_task_running,
+fexit:vmlinux:scx_simple_running /@start_acct[tid]/ {
+    $d = nsecs - @start_acct[tid];
+    if ($d > 0 && $d < 1000000) { @scx_latency["2. SCX_Accounting"] = avg($d); }
+    delete(@start_acct[tid]);
+}
+
+END {
+    printf("\n--- FINAL SCX COMPARISON RESULTS (ns) ---\n");
+    print(@scx_latency);
+    /* Clean up maps to prevent the 'DEBUG DUMP' of timestamps */
+    clear(@start_pl);
+    clear(@start_acct);
+}
