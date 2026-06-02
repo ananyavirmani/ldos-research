@@ -1,0 +1,14 @@
+
+ Performance counter stats for 'system wide':
+
+      1,238,325.14 msec task-clock                       #   39.984 CPUs utilized             
+           312,289      context-switches                 #  252.187 /sec                      
+            12,109      cpu-migrations                   #    9.779 /sec                      
+ 3,536,995,307,512      cycles                           #    2.856 GHz                       
+ 4,057,399,160,654      instructions                     #    1.15  insn per cycle            
+       390,255,076      cache-misses                                                          
+   452,492,527,313      branches                         #  365.407 M/sec                     
+     4,573,617,620      branch-misses                    #    1.01% of all branches           
+
+      30.970336425 seconds time elapsed
+

@@ -1,0 +1,13 @@
+date=Fri May 22 08:49:36 PM CDT 2026
+hostname=node0.avirmani-306351.ldosresearch-pg0.wisc.cloudlab.us
+kernel=6.6.42-custom-cfs
+nproc=40
+mode=1
+workers=160
+run=3
+timeout=30s
+cmd=stress-ng --cpu 160 --timeout 30s --metrics-brief
+60:#define SELECT_TASK_RQ_FAIR_EXP_MODE 1
+8062:	#if SELECT_TASK_RQ_FAIR_EXP_MODE == 1
+8066:	#elif SELECT_TASK_RQ_FAIR_EXP_MODE == 2
+8070:	#elif SELECT_TASK_RQ_FAIR_EXP_MODE == 3

@@ -1,0 +1,30 @@
+59a60,61
+> #define SELECT_TASK_RQ_FAIR_EXP_MODE 0
+> 
+8059a8062,8087
+> 	#if SELECT_TASK_RQ_FAIR_EXP_MODE == 1
+> 		if (cpumask_test_cpu(prev_cpu, p->cpus_ptr))
+> 			return prev_cpu;
+> 
+> 	#elif SELECT_TASK_RQ_FAIR_EXP_MODE == 2
+> 		if (cpumask_test_cpu(cpu, p->cpus_ptr))
+> 			return cpu;
+> 
+> 	#elif SELECT_TASK_RQ_FAIR_EXP_MODE == 3
+> 		{
+> 			int i;
+> 			int best_cpu = prev_cpu;
+> 			unsigned long best_nr = ULONG_MAX;
+> 
+> 			for_each_cpu(i, p->cpus_ptr) {
+> 				struct rq *rq_i = cpu_rq(i);
+> 				unsigned long nr = rq_i->nr_running;
+> 
+> 				if (nr < best_nr) {
+> 					best_nr = nr;
+> 					best_cpu = i;
+> 				}
+> 			}
+> 			return best_cpu;
+> 		}
+> 	#endif
