@@ -1,0 +1,9 @@
+date=Thu Jun  4 07:31:05 AM CDT 2026
+hostname=node0.avirmani-307283.ldosresearch-pg0.wisc.cloudlab.us
+kernel=6.6.42
+nproc=40
+mode=top3_random
+workers=80
+run=2
+timeout=30s
+cmd=stress-ng --cpu 80 --timeout 30s --metrics-brief
